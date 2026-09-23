@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaan Çınar — Portfolio</title>
+    
+    <!-- Fontlar & İkonlar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Orijinal Particles.js Kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+
+<style>
+        :root {
+            --bg-color: #3a3f47;
+            --card-bg: rgba(23, 28, 38, 0.65);
+            --border-color: rgba(255, 255, 255, 0.12);
+            --accent-color: #38bdf8;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Orijinal Canvas Stil Yapısı */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigasyon Barı */
+        header {
+            width: 100%;
+            max-width: 1100px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            color: #ffffff; /* Hepsi Tamamen Beyaz Yapıldı */
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Ana İçerik Konteyneri */
+        main {
+            width: 100%;
+            max-width: 1100px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Grid Düzeni */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Cam Efektli Modern Kartlar */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.75rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 1.6rem;
+            color: var(--accent-color);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Teknoloji Rozetleri */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-color);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        /* Buton Stilleri */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.65rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #0f172a;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Orijinal Canvas Elemanı -->
+    <canvas class="background"></canvas>
+
+    <!-- Header / Navigasyon -->
+    <header>
+        <a href="../index.html" class="brand">KAAN ÇINAR</a>
+        <nav>
+            <ul>
+                <li><a href="../index.html">HOMEPAGE</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Portfolyo Alanı -->
+    <main>
+        <section class="page-header">
+            <h1>PORTFOLYO</h1>
+            <p>Some of the projects that developed by me.</p>
+        </section>
+
+        <div class="portfolio-grid">
+            
+            <!-- Proje 1: Mask Detector -->
+            <article class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-head-side-mask card-icon"></i>
+                        <span class="tag">Bachlour Degree Gradiation Thesis - ML / Deep Learning</span>
+                    </div>
+                    <h2 class="card-title">Covid19-Mask-Detection</h2>
+                    <p class="card-desc">
+                        A deep learning and image processing project developed using TensorFlow and OpenCV to detect whether people are wearing masks in social settings.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">C++</span>
+                    </div>
+                </div>
+                <a href="https://github.com/cinarkaan/Covid19-Mask-Detection" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> SOURCE CODE
+                </a>
+            </article>
+
+            <!-- Proje 2: Web Dev -->
+            <article class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-cloud-sun card-icon"></i>
+                        <span class="tag">Web Development</span>
+                    </div>
+                    <h2 class="card-title">Hotel Rezervation</h2>
+                    <p class="card-desc">
+                        This project is designed to manage a hotel reservation system. The system allows users to book reservations, manage customer information, and handle hotel rooms. It is developed using modern technologies and provides a user-friendly interface.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Java17</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Maven</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">AJAX</span>
+                        <span class="tag">HTML5/CSS3</span>
+                    </div>
+                </div>
+                <a href="https://github.com/cinarkaan/HotelBookApp-SpringBoot-SSMS-HTML5-CSS-JS-MAVEN" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> SOURCE CODE
+                </a>
+            </article>
+
+            <!-- Proje 3: Web Dev -->
+            <article class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-cloud-sun card-icon"></i>
+                        <span class="tag">Web Development</span>
+                    </div>
+                    <h2 class="card-title">Climate & Weather Tracking Forecast System</h2>
+                    <p class="card-desc">
+                        A web application developed with Spring MVC architecture that allows real-time monitoring of weather conditions and global average temperatures.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Spring MVC</span>
+                        <span class="tag">HTML/CSS</span>
+                    </div>
+                </div>
+                <a href="https://github.com/cinarkaan/iklimvehavatakipsistemi" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> SOURCE CODE
+                </a>
+            </article>
+
+            <!-- Proje 4: Bookstore REST API Test -->
+            <article class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-vial-circle-check card-icon"></i>
+                        <span class="tag">Test Automation</span>
+                    </div>
+                    <h2 class="card-title">Bookstore REST API Test</h2>
+                    <p class="card-desc">
+                    A behavior-driven REST API test automation project developed using Java and the Cucumber (BDD) architecture for a bookstore service.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Cucumber BDD</span>
+                    </div>
+                </div>
+                <a href="https://github.com/cinarkaan/JAVA-RESTAPI-CUCUMBER-BOOKSTORE-TEST" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> SOURCE CODE
+                </a>
+            </article>
+            
+            <!-- Proje 5: Instagram Profile Gauge Test -->
+            <article class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-robot card-icon"></i>
+                        <span class="tag">UI Automation</span>
+                    </div>
+                    <h2 class="card-title">Instagram Profile Gauge Test</h2>
+                    <p class="card-desc">
+                     An end-to-end UI test automation project using Java and Gauge Framework, employing a Readable Scripting Architecture (BDD) for Instagram profile functionalities.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Gauge</span>
+                        <span class="tag">Selenium</span>
+                    </div>
+                </div>
+                <a href="https://github.com/cinarkaan/JAVA-GAUGE-TEST-INSTAGRAM-PROFILE-" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> SOURCE CODE
+                </a>
+            </article>
+
+            <!-- Proje: Salesforce VRP Test Automation -->
+            <article class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-cloud-check card-icon"></i>
+                        <span class="tag">Salesforce QA</span>
+                    </div>
+                    <h2 class="card-title">Salesforce VRP Test Suite</h2>
+                    <p class="card-desc">
+                        Salesforce platformu için Java, Selenium ve Cucumber (BDD) mimarisi kullanılarak hazırlanmış, davranış odaklı uçtan uca UI test otomasyon projesi.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tag">Salesforce</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Selenium</span>
+                        <span class="tag">Cucumber BDD</span>
+                    </div>
+                </div>
+                <a href="https://github.com/cinarkaan/VRPTestSalesForce-Java-Selenium-Cucumber" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> SOURCE CODE
+                </a>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Orijinal Particles.js Başlatma Kodu -->
+    <script>
+        window.onload = function() {
+            Particles.init({
+                selector: '.background',
+                color: '#ffffff',
+                maxParticles: 140,
+                sizeVariations: 3,
+                speed: 0.5,
+                minDistance: 100,
+                connectParticles: false,
+                responsive: null
+            });
+        };
+    </script>
+</body>
+</html>

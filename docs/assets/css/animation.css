@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100;300&family=Courgette&family=Indie+Flower&family=Kalam&display=swap');
+
+#parent {
+  margin: auto;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden; 
+  font-family: 'Alegreya Sans SC', sans-serif;  
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+#head{
+  margin: auto;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden; 
+  font-family: 'Alegreya Sans SC', sans-serif;  
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#border {
+  border-bottom: solid 3px rgba(255, 255, 255, 0.75);
+  position: absolute;
+  right: -7px;
+  width: 20px;
+}
+
+#head {
+  animation: animated-text 3s infinite;
+}
+
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 300px;}
+}
+
+@keyframes animated-cursor{
+  from{border-bottom-color: rgba(255, 255, 255, 0.75);}
+  to{border-bottom-color: transparent;}
+}
+
+@media screen and (max-width: 600px) {
+  #parent{
+    font-size: 3vw;
+  }
+}

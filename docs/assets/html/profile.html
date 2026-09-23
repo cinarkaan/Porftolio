@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaan Çınar — Profile</title>
+    
+    <!-- Ön Bellek Temizleme -->
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    
+    <!-- Fontlar & İkonlar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Particles.js Kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+
+    <style>
+        :root {
+            --card-bg: rgba(23, 28, 38, 0.75);
+            --border-color: rgba(255, 255, 255, 0.12);
+            --accent-color: #38bdf8;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Arka plan görseli ve okunabilirlik için karanlık overlay eklendi */
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('../img/ProfileBack.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas Stil Yapısı */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigasyon Barı */
+        header {
+            width: 100%;
+            max-width: 1100px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            color: #ffffff; 
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Profil Konteyneri */
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        /* Cam Efektli Profil Kartı */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            width: 100%;
+        }
+
+        .profile-avatar {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
+
+        .profile-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .profile-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .profile-bio {
+            margin: 2rem 0;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            text-align: left;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .profile-bio p {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .profile-bio ul {
+            list-style: none;
+        }
+
+        .profile-bio li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .profile-bio li i {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--accent-color);
+        }
+
+        .profile-bio strong {
+            color: var(--accent-color);
+        }
+
+        /* CV İndir Butonu */
+        .btn-cv {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background-color: var(--text-main);
+            color: #0f172a;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-cv:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .profile-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Orijinal Canvas Elemanı -->
+    <canvas class="background"></canvas>
+
+    <!-- Header / Navigasyon -->
+    <header>
+        <a href="../index.html" class="brand">KAAN ÇINAR</a>
+        <nav>
+            <ul>
+                <li><a href="../index.html">HOMEPAGE</a></li>
+                <li><a href="portfolio.html">PORTFOLIO</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Profil Alanı -->
+    <main>
+        <div class="profile-card">
+            
+<img 
+  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" 
+  alt="Profil Avatarı" 
+  style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;"/>
+
+            <h1 class="profile-title"><i class=""></i> Junior Software Engineer</h1>
+            <h2 class="profile-subtitle"><i class="fa-solid fa-graduation-cap"></i> MSc At Hacettepe University</h2>
+            <h3 class="profile-subtitle" style="font-size: 0.95rem;"><i class="fa-solid fa-location-dot"></i> Ankara, Turkey</h3>
+
+            <div class="profile-bio">
+                <p>Profile Card</p>
+                <ul>
+                    <li><i class="fa-solid fa-laptop-code"></i> <strong>Expertise:</strong> Web Development,E2E Test Automation,Quality Assurance</li>
+                    <li><i class="fa-solid fa-terminal"></i> <strong>Specialist Languages:</strong> Java, C#, C++</li>
+                    <li><i class="fa-solid fa-book-open"></i> <strong>Academic:</strong> Deep Learning, Algorithms, Network</li>
+                </ul>
+            </div>
+
+            <a class="btn-cv" href="../src/-KAANCINAR-.pdf" download>
+                <i class="fa-solid fa-file-arrow-down"></i> Curriculum Vitae
+            </a>
+            
+        </div>
+    </main>
+
+    <!-- Orijinal Particles.js Başlatma Kodu -->
+    <script>
+        window.onload = function() {
+            Particles.init({
+                selector: '.background',
+                color: '#ffffff',
+                maxParticles: 140,
+                sizeVariations: 3,
+                speed: 0.5,
+                minDistance: 100,
+                connectParticles: false,
+                responsive: null
+            });
+        };
+    </script>
+</body>
+</html>

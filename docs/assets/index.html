@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KAAN ÇINAR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Ön Bellek Temizleme -->
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="img/WebSitesLogo.jpg" />
+    
+    <!-- Orijinal CSS Dosyaların -->
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/canvas.css">
+    <link rel="stylesheet" href="css/logo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Indie+Flower&family=Kalam&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- JS Kütüphaneleri -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <script src="js/modernizr.js"></script>
+</head>
+
+<body id="top">
+
+    <!-- Canvas Arka Plan -->
+    <canvas class="background" style="position: fixed; width: 100%; height: 100vh;"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="s-header">         
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html" style="font-size: medium; font-family: Verdana, Geneva, Tahoma, sans-serif; color: rgb(255, 255, 255);">KAAN ÇINAR</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon bg-white bg-opacity-25"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a style="color: rgb(255, 255, 255);" class="nav-link active" href="html/profile.html">PROFILE</a></li>
+                        <li class="nav-item"><a style="color: rgb(255, 255, 255);" class="nav-link active" href="html/portfolio.html">PORTFOLIO</a></li>             
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="img/back.jpg" data-natural-width="3000" data-natural-height="2000" data-position-y="center">
+        <div class="overlay"></div>
+        <div class="shadow-overlay"></div>
+        <div class="home-content">
+            <div class="row home-content__main">
+                <h4 id="head">BEYOND THE IMAGINE</h4>
+                <br/><br/><br/><br/>
+                <div style="text-align: center; letter-spacing: 10px; position: relative; height: auto;">
+                    <a href="https://www.linkedin.com/in/cinarkaan/" style="color: gray;"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="mailto:cnrkaan98@gmail.com" style="color: gray;"><i class="fas fa-envelope fa-2x"></i></a>
+                    <a href="https://github.com/cinarkaan" style="color: gray;"><i class="fab fa-github fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale-pulse-out">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Betikler -->
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Particles.js Başlatıcı -->
+    <script>
+        window.onload = function() {
+            Particles.init({
+                selector: '.background',
+                color: "#ffffff",
+                maxParticles: 300,
+                sizeVariations: 3,
+                speed: 0.5,
+                minDistance: 100,
+                connectParticles: false,
+                responsive: null
+            });
+        };
+    </script>
+</body>
+</html>
